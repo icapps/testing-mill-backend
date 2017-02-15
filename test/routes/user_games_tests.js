@@ -24,6 +24,25 @@ describe('ROUTES: users/:id/games', () => {
     after(() => User.destroy({ truncate: true, restartIdentity: true }));
 
     describe('POST /users/:id/games', () => {
+
+        it('resturns a 404 when user does not exist', () => {
+            const postObject = {
+                game: {
+                    answers: [
+                        {
+                            temptationId: temptations[0].id,
+                            name: faker.name.findName(),
+                            iq: 100,
+                        },
+                    ],
+                },
+            };
+            return request(app)
+                .post('/users/55555/games')
+                .send(postObject)
+                .expect(404)
+        });
+
         it('returns a 200 with JSON object containing game score and updated user', () => {
             const postObject = {
                 game: {

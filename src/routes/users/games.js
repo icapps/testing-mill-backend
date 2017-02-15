@@ -28,7 +28,10 @@ router.post('/', (req, res, next) => {
     if (!userId || answers.length !== temptationIds.length) throw new errors.InvalidRequest();
 
     return User.findById(userId)
-        .then((userObject) => user = userObject)
+        .then((userObject) => {
+            if (userObject === null) throw new errors.ResourceNotFound('User not found');
+            user = userObject;
+        })
         .then(() => Temptation.findAll({ where: { id: { $in: temptationIds } } }))
         .then((temptations) => {
             score = gameHelper.getScore(temptations, answers);
