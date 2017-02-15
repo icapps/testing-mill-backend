@@ -17,7 +17,7 @@ const gameHelper = require('../../helpers/gameHelper');
 const DEFAULT_AMOUNT = 3;
 const DEFAULT_GENDER = 'all';
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
     let user;
     let score;
 
@@ -36,7 +36,8 @@ router.post('/', (req, res) => {
             user.gamesPlayed += 1;
             return user.save();
         })
-        .then((updatedUser) => res.send({ game: { score }, user }));
+        .then((updatedUser) => res.send({ game: { score }, user }))
+        .catch((err) => next(err));
 });
 
 module.exports = exports = router;

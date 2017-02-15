@@ -26,15 +26,16 @@ router.get('/', (req, res) => {
         limit: amount,
         order: Sequelize.fn('RANDOM'),
     })
-        .then((result) => temptations = result)
-        .then(() => Temptation.findAll({
-            where: { gender: { $in: gender === 'all' ? ['male', 'female'] : [gender] } },
-            attributes: ['name'],
-        }))
-        .then((names) => {
-            availableNames = names.map((item) => item.name);
-            res.send({ temptations, amount, gender, availableNames });
-        })
+    .then((result) => temptations = result)
+    .then(() => Temptation.findAll({
+        where: { gender: { $in: gender === 'all' ? ['male', 'female'] : [gender] } },
+        attributes: ['name'],
+    }))
+    .then((names) => {
+        availableNames = names.map((item) => item.name);
+        res.send({ temptations, amount, gender, availableNames });
+    })
+    .catch((err) => next(err));
 });
 
 module.exports = exports = router;
