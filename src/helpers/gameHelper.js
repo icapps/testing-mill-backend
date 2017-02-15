@@ -22,7 +22,12 @@ function getScore(questions, answers) {
 }
 
 function getUserIq(score, userIq) {
-    const newIq = score >= 50 ? userIq - Number((score / 10).toFixed()) : userIq + Number((score / 10).toFixed());
+    let newIq = userIq;
+
+    if (score === 0) newIq += 50;
+    else if (score < 50) newIq += Number((score / 10).toFixed());
+    else newIq -= Number((score / 10).toFixed());
+
     return (newIq <= 0 ? 0 : newIq);
 }
 

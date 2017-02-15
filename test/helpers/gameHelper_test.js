@@ -64,5 +64,9 @@ describe('helpers/gameHelper', () => {
             const userIq = 0;
             expect(gameHelper.getUserIq(67, userIq)).to.eql(0);
         });
+        it('returns userIq with maximum increase when score = 0', () => {
+            const userIq = 100;
+            expect(gameHelper.getUserIq(0, userIq)).to.eql(150);
+        });
     });
 });
