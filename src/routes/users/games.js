@@ -19,6 +19,8 @@ const DEFAULT_GENDER = 'all';
 
 router.post('/', (req, res) => {
     let user;
+    let score;
+
     const userId = parseInt(req.params.id, 10);
     const answers = req.body.game.answers;
     const temptationIds = answers.map((item) => item.temptationId);
@@ -29,11 +31,12 @@ router.post('/', (req, res) => {
         .then((userObject) => user = userObject)
         .then(() => Temptation.findAll({ where: { id: { $in: temptationIds } } }))
         .then((temptations) => {
-            const score = gameHelper.getScore(temptations, answers);
+            score = gameHelper.getScore(temptations, answers);
             user.temptationIq = gameHelper.getUserIq(score, user.temptationIq);
             user.gamesPlayed += 1;
-            res.send({ game: { score }, user });
-        });
+            return user.save();
+        })
+        .then((updatedUser) => res.send({ game: { score }, user }));
 });
 
 module.exports = exports = router;

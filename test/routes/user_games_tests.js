@@ -58,7 +58,7 @@ describe('ROUTES: users/:id/games', () => {
                     expect(game.score).to.be.a('number');
                     expect(updatedUser.id).to.eql(user.id);
                     expect(updatedUser.gamesPlayed).to.eql(user.gamesPlayed + 1);
-                })
+                });
         });
     });
 });
