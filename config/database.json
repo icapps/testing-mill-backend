@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "test",
-    "password": "test",
-    "database": "temptation_test",
-    "host": "dockerhost",
+    "username": "dev",
+    "password": "dev",
+    "database": "temptation_dev",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
@@ -15,10 +15,7 @@
     "logging": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "tempation_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
   }
 }
