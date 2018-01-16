@@ -9,8 +9,8 @@
 'use strict';
 
 const app = require(`${process.cwd()}/src/server.js`);
-const User = require('../../src/models').USER;
-const Temptation = require('../../src/models').TEMPTATION;
+const User = require('../../src/models').user;
+const Temptation = require('../../src/models').temptation;
 
 describe('ROUTES: users/:id/games', () => {
     let user;
@@ -71,10 +71,9 @@ describe('ROUTES: users/:id/games', () => {
                 .send(postObject)
                 .expect(200)
                 .expect((res) => {
-                    const updatedUser = res.body.user;
-                    const game = res.body.game;
+                    const { score, user: updatedUser } = res.body.data;
 
-                    expect(game.score).to.be.a('number');
+                    expect(score).to.be.a('number');
                     expect(updatedUser.id).to.eql(user.id);
                     expect(updatedUser.gamesPlayed).to.eql(user.gamesPlayed + 1);
                 });

@@ -13,17 +13,18 @@ const name = 'Jean';
 const imageUrl = 'http://test';
 const gender = 'male';
 const iq = 45;
+const year = 2017;
 
 function createTemptation() {
-    return models.TEMPTATION.create({ name, imageUrl, gender, iq });
+    return models.temptation.create({ name, imageUrl, gender, iq, year });
 }
 
 function createTemptationWithoutName() {
-    return models.TEMPTATION.create({ imageUrl, gender, iq });
+    return models.temptation.create({ imageUrl, gender, iq, year });
 }
 
 function createTemptationWithInvalidDataTypes() {
-    return models.TEMPTATION.create({ name, iq: 'abc', gender, imageUrl });
+    return models.temptation.create({ name, iq: 'abc', gender, imageUrl, year });
 }
 
 describe('models/temptation', () => {
@@ -47,6 +48,10 @@ describe('models/temptation', () => {
         })
         it('has a gender', () => {
             expect(temptation.gender).to.eql(gender);
+        })
+
+        it('has a year', () => {
+            expect(temptation.year).to.eql(year);
         })
     });
 

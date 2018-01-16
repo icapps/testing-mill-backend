@@ -6,8 +6,21 @@
  * Copyright (c) 2016 iCapps. All rights reserved.
  */
 
-'use strict';
+const logger = require('express-bunyan-logger');
 
-const morgan = require('morgan');
-
-module.exports = exports = morgan('combined');
+module.exports = exports = logger({
+    name: 'logger',
+    streams: [
+        {
+            level: 'info',
+            stream: process.stdout
+        },
+        {
+            path: './log/trace.log',
+            level: 'trace'
+        }
+    ],
+    parseUA: true,
+    excludes: ['Connection', 'req-headers', 'res-headers', 'response-hrtime', 'short-body'],
+    obfuscate: ['body.iq']
+});

@@ -17,6 +17,7 @@ const sinonChai = require('sinon-chai');
 // const dirtyChai = require('dirty-chai');
 // const mock = require('mock-require');
 
+process.env.NODE_ENV = 'test';
 chai.config.includeStack = true;
 chai.config.showDiff = true;
 chai.use(chaiAsPromised);

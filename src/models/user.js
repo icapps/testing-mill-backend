@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var USER = sequelize.define('USER', {
+  var user = sequelize.define('user', {
     name: DataTypes.STRING,
     temptationIq: DataTypes.INTEGER,
     gamesPlayed: DataTypes.INTEGER
   });
 
-  return USER;
+  return user;
 };

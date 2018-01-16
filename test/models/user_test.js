@@ -12,15 +12,15 @@ const models = require('../../src/models' );
 const userName = 'Jean';
 
 function createUser(name) {
-    return models.USER.create({ name: userName });
+    return models.user.create({ name: userName });
 }
 
 function createUserWithoutName() {
-    return models.USER.create();
+    return models.user.create();
 }
 
 function createUserWithInvalidDataTypes() {
-    return models.USER.create({ name: userName, temptationIq: 'abc' });
+    return models.user.create({ name: userName, temptationIq: 'abc' });
 }
 
 describe('models/user', () => {
