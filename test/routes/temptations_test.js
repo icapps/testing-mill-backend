@@ -18,7 +18,7 @@ describe('ROUTES: tempations', () => {
                 .get('/temptations')
                 .expect(200)
                 .expect((res) => {
-                    expect(res.body.temptations.length).to.eql(3);
+                    expect(res.body.data.temptations.length).to.eql(3);
                 })
         );
         it('returns a 200 with JSON object containing 5 male temptations', () =>
@@ -26,11 +26,11 @@ describe('ROUTES: tempations', () => {
                 .get('/temptations?amount=5&gender=male')
                 .expect(200)
                 .expect((res) => {
-                    expect(res.body.temptations.length).to.eql(5);
-                    expect(res.body.gender).to.eql('male');
-                    expect(res.body.amount).to.eql(5);
-                    expect(res.body).to.have.a.property('availableNames');
-                    for (const temptation of res.body.temptations) {
+                    expect(res.body.data.temptations.length).to.eql(5);
+                    expect(res.body.data.gender).to.eql('male');
+                    expect(res.body.data.amount).to.eql(5);
+                    expect(res.body.data).to.have.a.property('availableNames');
+                    for (const temptation of res.body.data.temptations) {
                         expect(temptation.gender).to.eql('male');
                     }
                 })

@@ -9,7 +9,6 @@
 'use strict';
 
 const express = require('express');
-// const smsFallback = require('./services/smsFallback');
 
 /*
  * MODULE CONFIGURATION
@@ -17,8 +16,8 @@ const express = require('express');
 require('./config/environment');
 const bodyParser = require('./config/bodyParser');
 const helmet = require('./config/helmet');
-// const logger = require('./config/logger');
-// const errorLogger = require('./config/errorLogger');
+const logger = require('./config/logger');
+const errorLogger = require('./config/errorLogger');
 
 /*
  * CONSTANT DECLARATION
@@ -38,8 +37,7 @@ const app = express();
 app.use(helmet);
 app.use(bodyParser);
 
-// if (process.env.NODE_ENV !== 'test')
-// app.use(logger);
+if (process.env.NODE_ENV !== 'test') app.use(logger);
 
 /*
  * ROUTE DECLARATIONS
@@ -55,7 +53,7 @@ app.use('/users', usersRouter);
 app.all('*', (req, res, next) => res.sendStatus(404));
 
 app.use(errorHandler);
-// app.use(errorLogger);
+app.use(errorLogger);
 
 /*
  * START SERVER

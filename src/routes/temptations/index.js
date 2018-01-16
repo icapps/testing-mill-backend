@@ -10,6 +10,7 @@
 
 const router = require('express').Router({ mergeParams: true });
 const Temptation = require('../../models').temptation;
+const { question: questionSerializer } = require('../../serializers');
 const Sequelize = require('sequelize');
 const DEFAULT_AMOUNT = 3;
 const DEFAULT_GENDER = 'all';
@@ -30,8 +31,9 @@ router.get('/', async (req, res, next) => {
             attributes: ['name'],
         });
         const availableNames = names.map((item) => item.name);
-        res.status(200).json({ temptations, amount, gender, availableNames });
+        res.status(200).json(questionSerializer.serialize({ temptations, amount, gender, availableNames }));
     } catch (e) {
+        console.error(e);
         next (e);
     }
 });

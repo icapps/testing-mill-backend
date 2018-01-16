@@ -64,11 +64,6 @@ describe('ROUTES: users', () => {
             request(app)
             .get('/users/100000')
                 .expect(404)
-            .then(({ body }) => {
-                console.log('@@@@@@@@@@@@@@@@@@@@@');
-                console.log('body', JSON.stringify(body, null, 2));
-                console.log('@@@@@@@@@@@@@@@@@@@@@');
-            })
         );
         it('returns a 500 when userId is not an integer', () =>
             request(app)
