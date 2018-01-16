@@ -8,14 +8,11 @@
 
 'use strict';
 
+const { ErrorSerializer } = require('jsonade');
+
 module.exports = exports = (err, req, res, next) => {
     if (res.headersSent) return next(err);
 
-    res.status(err.status || 500).send({
-        errors: {
-            title: err.message,
-            status: err.status || 500,
-            detail: err.detail,
-        }
-    });
+    const error = Object.assign(err, { status: err.status || 500, title: err.message });
+    res.status(error.status).send(ErrorSerializer.serialize([error]));
 };
