@@ -14,10 +14,6 @@ module.exports = exports = logger.errorLogger({
             level: 'info',
             stream: process.stdout
         },
-        {
-            path: './log/errors.log',
-            level: 'error'
-        },
     ],
     parseUA: false,
     excludes: ['req-headers', 'res-headers', 'response-hrtime', 'short-body'],

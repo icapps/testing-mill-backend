@@ -15,10 +15,6 @@ module.exports = exports = logger({
             level: 'info',
             stream: process.stdout
         },
-        {
-            path: './log/trace.log',
-            level: 'trace'
-        }
     ],
     parseUA: true,
     excludes: ['Connection', 'req-headers', 'res-headers', 'response-hrtime', 'short-body'],
